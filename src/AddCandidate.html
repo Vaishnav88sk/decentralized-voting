@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel - Add Candidates</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 0;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 30px;
+        width: 100%;
+        max-width: 700px;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #ffffff;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+      }
+
+      .btn {
+        transition: all 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+      }
+
+      #message {
+        font-weight: bold;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <h1>🔐 Admin Panel</h1>
+      <div class="text-center mb-3">
+        <button id="connectBtn" class="btn btn-warning me-2">Connect Wallet</button>
+        <a href="index.html" class="btn btn-primary">Back to Voting</a>
+      </div>
+
+      <p id="adminAddress" class="text-center mb-3"></p>
+      <hr />
+
+      <div id="loader"><p class="text-center">⏳ Connecting...</p></div>
+
+      <div id="content" style="display: none;">
+        <div class="form-group mb-3">
+          <label for="candidateName" class="mb-2">Enter New Candidate Name</label>
+          <input
+            type="text"
+            id="candidateName"
+            class="form-control"
+            placeholder="e.g. John Doe"
+            required
+          />
+        </div>
+        <button onclick="Admin.addCandidate()" class="btn btn-success w-100">
+          ➕ Add Candidate
+        </button>
+        <p id="message" class="mt-4 text-success text-center"></p>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/admin.js"></script>
+
+    <script>
+      $(window).on('load', function () {
+        Admin.init();
+        $('#connectBtn').click(async function () {
+          await Admin.connectWallet();
+        });
+      });
+    </script>
+  </body>
+</html>
