@@ -10,8 +10,6 @@
 
 ## Steps to run the project:
 
-### Step 1. Clone the project
-
 ### Step 1. Install dependencies
 ```
 $ npm install
